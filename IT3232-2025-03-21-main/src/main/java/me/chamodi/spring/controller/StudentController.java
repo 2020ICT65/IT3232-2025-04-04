@@ -5,8 +5,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -39,5 +43,27 @@ public class StudentController {
 		// return null;
 		return mstudents.get(regno);
 	}
+
+	@PostMapping("/add")
+	public String addStudent(@RequestBody student student){
+		mstudents.put(student.getRegNo(), student);
+		return "New Student Added";
+	}
 	
+	@DeleteMapping("/delete/{id}")
+	public String deleteStudent(@PathVariable("id") String regno){
+		if(mstudents.get(regno) != null){
+			mstudents.remove(regno);
+			return "The student removed";
+		}
+		return "404 Could'nt find the student";
+	}
+	@PutMapping("/update/{id}")
+	public String updateStudent(@PathVariable("id") String regno, @RequestBody student student){
+		if(mstudents.get(regno) != null){
+			mstudents.put(student.getRegNo(), student);
+			return "The student details are updated";
+		}
+		return "404 Could'nt find the student";
+	}
 }

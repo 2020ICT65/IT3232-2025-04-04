@@ -5,6 +5,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import me.chamodi.spring.model.student;
+
 @RestController
 @RequestMapping("/app")
 
@@ -23,6 +25,5 @@ public class AppController {
 	public String myAge(@PathVariable("ag") int age) {
 		return "My age is "+age;
 	}
-	
 	
 }
